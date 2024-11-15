@@ -33,7 +33,7 @@ ssh-keygen -t rsa -C "401265881@qq.com"
 ## 第五步关联仓库
 新建一个仓库，将GitHub仓库与本地仓库关联
 ```ssh
-git remote add origin git@github.com:BackRerd/post.git
+git remote add origin git@github.com:BackRerd/FileBlog.git
 ```
 这里使用的我自己的git。
 关联好后使用`git push -u origin master`与GitHub仓库第一次提交。
@@ -72,7 +72,7 @@ git config --global user.email "4012658814@qq.com"
 ```yaml
 deploy:
   type: 'git'
-  repository: 'git@github.com:BackRerd/testblog.git'
+  repository: 'git@github.com:BackRerd/backrer.github.io.git'
   branch: main
 ```
 ## 第三步上传

@@ -3,11 +3,11 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle: ''
-description: ''
+title: 笔记小站
+subtitle: 'Java|Unity|绘画'
+description: '一个记录笔记的站点'
 keywords:
-author: John Doe
+author: JoBackRer
 language: en
 timezone: ''
 
@@ -101,7 +101,9 @@ theme: reimu
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
-  type: ''
+  type: 'git'
+  repository: 'git@github.com:BackRerd/backrer.github.io.git'
+  branch: main
 
 feed:
   enable: true
