@@ -46,7 +46,7 @@ git push origin master
 ```
 ## 与本地合并命令
 ```ssh
-git pull --rebase origin masters
+git pull --rebase origin master
 ```
 
 ### hexo博客上传到github
