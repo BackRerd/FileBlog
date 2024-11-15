@@ -1,5 +1,3 @@
-# 仓库的使用
-直接从第四步开始。
 ## 上传命令
 ```ssh
 git push origin master
