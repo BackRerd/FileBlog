@@ -11,10 +11,11 @@ cover: https://s2.loli.net/2024/04/22/NzD6FRuQ3wKJ4ZI.png
 git init
 ```
 这样就创建好了本地仓库
-## 第二步添加文件
+## 第二步添加文件，上传第一步
 使用指令`git add .`将当前所有文件都添加到本地仓库中
 然后使用`git status`查看添加的情况
-## 第三步提交到本地仓库
+
+## 第三步提交到本地仓库，上传第二部
 使用命令,将当前文件上传到本地仓库中，`-m`后面接参数为本次提交的注释
 ```ssh
 git commit -m "first commit"
@@ -41,11 +42,11 @@ git remote add origin git@github.com:BackRerd/FileBlog.git
 完成后就可以使用`git push origin master`进行文件的上传了
 # 仓库的使用
 直接从第四步开始。
-## 上传命令
+## 上传命令，上传第三部
 ```ssh
 git push origin master
 ```
-## 与本地合并命令
+## 与本地合并命令！！！上传之前首要这个！！
 ```ssh
 git pull --rebase origin master
 ```
@@ -79,7 +80,7 @@ deploy:
   repository: 'git@github.com:BackRerd/backrer.github.io.git'
   branch: main
 ```
-## 第三步上传
+## 第三步上传，上传最后一步
 先生成网页
 ```ssh
 hexo cl
@@ -89,3 +90,10 @@ hexo g
 ```ssh
 hexo d
 ```
+
+# 新建网页
+
+```
+hexo new 文章名称
+```
+
