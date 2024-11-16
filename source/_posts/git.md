@@ -60,6 +60,8 @@ ssh -T git@github.com
 ### 安装组件
 安装deploy组件
 ```ssh
+$ npm config set registry https://registry.npmmirror.com
+npm install
 npm install hexo-deployer-git --save
 ```
 ### 添加账户密码
