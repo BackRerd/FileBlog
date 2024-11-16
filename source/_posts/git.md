@@ -2,6 +2,7 @@
 title: 如何使用github仓库
 date: 2024-11-15 10:43:30
 tags: ['git','其他']
+cover: https://s2.loli.net/2024/04/22/NzD6FRuQ3wKJ4ZI.png
 ---
 # 仓库的创建与使用
 ## 第一步创建本地仓库
