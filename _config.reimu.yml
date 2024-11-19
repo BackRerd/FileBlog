@@ -128,9 +128,9 @@ mermaid: ## mermaid url https://github.com/knsv/mermaid
 # version 1.5.1
 # notify and verify have been deprecated
 valine:
-  enable: false # if you want to use valine,please set this value is true
-  appId: # leancloud application app id
-  appKey: # leancloud application app key
+  enable: true # if you want to use valine,please set this value is true
+  appId: 1gsg5wnT8VSEiDNE5JNMyYwF-gzGzoHsz # leancloud application app id
+  appKey: Bwev2K5LHQqHu4T65j5a5SNo # leancloud application app key
   pageSize: 10 # comment list page size
   avatar: mp # gravatar style https://valine.js.org/#/avatar
   lang: zh-cn # i18n: zh-cn/en
