@@ -26,6 +26,6 @@
     "hexo-server": "^3.0.0",
     "hexo-tag-embed": "^1.0.0",
     "hexo-theme-keep": "^4.2.5",
-    "hexo-theme-reimu": "^0.3.2"
+    "hexo-theme-reimu": "^1.1.1"
   }
 }
