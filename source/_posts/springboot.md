@@ -8,8 +8,6 @@ tags: ["java","spring"]
 
 spring-boot-devtools组件可以实现热部署。
 
-
-
 # 控制器
 
 - Spring Boot提供了@Controller和@RestController两种注解来标识此类负责接收和处理HTTP请求

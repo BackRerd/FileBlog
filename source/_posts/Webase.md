@@ -82,8 +82,12 @@ java -version
 
 配置环境变量-编辑配置文件
 
+```
+which java
+```
+
 ```sh
-nano ~/.bashrc
+vim /etc/profile
 ```
 
 ```sh
@@ -94,7 +98,7 @@ export PATH=$PATH:$JAVA_HOME/bin
 加载配置
 
 ```sh
-source ~/.bashrc
+source /etc/profile
 ```
 
 验证输出
