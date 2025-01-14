@@ -47,7 +47,7 @@ cp ../fisco/nodes/127.0.0.1/sdk/* ./conf/ #复制密钥
 grep -B 3 "main run success" log/WeBASE-Front.log
 ```
 
-出现与下方相似自愿即是启动成功
+出现与下方相似即是启动成功
 
 ![image.png](https://s2.loli.net/2025/01/08/saBLk8yZgxHWEG6.png)
 
