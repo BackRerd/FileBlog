@@ -17,7 +17,6 @@ tags: [fisco]
 下载工具Generator
 
 ```sh
-git clone https://gitee.com/BackRe/generator.git #有问题正在解决
 git clone https://gitee.com/FISCO-BCOS/generator.git #使用这个
 ```
 
