@@ -13,16 +13,12 @@ tags: [fisco]
 | 机构B | 节点2 | 群组1       | 30302   | 20202       | 8547            | 127.0.0.1 |
 |       | 节点3 | 群组1       | 30303   | 20203       | 8548            | 127.0.0.1 |
 | 机构C | 节点4 | 群组2       | 30304   | 20204       | 8549            | 127.0.0.1 |
-|       | 节点5 | 群组2       | 30305   | 20205       | 8550            | 127.0.0.1 |
-| 机构D | 节点6 | 群组3       | 30306   | 20206       | 8551            | 127.0.0.1 |
-|       | 节点7 | 群组3       | 30307   | 20207       | 8552            | 127.0.0.1 |
-|       | 节点8 | 群组3       | 30308   | 20208       | 8553            | 127.0.0.1 |
-| 机构E | 节点9 | 群组4       | 30309   | 20209       | 8554            | 127.0.0.1 |
 
 下载工具Generator
 
 ```sh
-git clone https://gitee.com/FISCO-BCOS/generator.git
+git clone https://gitee.com/BackRe/generator.git #有问题正在解决
+git clone https://gitee.com/FISCO-BCOS/generator.git #使用这个
 ```
 
 切进目录并进行安装
@@ -36,19 +32,12 @@ cd generator/
 
 ![image.png](https://s2.loli.net/2025/01/14/URS4lqVJjimCO8E.png)
 
-获取节点的二进制文件
+下载并解压二进制文件
 
 ```sh
-./generator --download_fisco ./meta
+git clone https://gitee.com/BackRe/resource.git
+tar -zxvf ./resource/fisco-bcos.tar.gz -C ./meta
 ```
-
-如何一直获取不下来，可以采取其他方式下载到指定文件夹
-
-```sh
-mkdir ./meta
-```
-
-这个meta相当于一个临时文件夹。
 
 查看fisco版本信息
 
@@ -92,12 +81,8 @@ INFO |  Chain cert end.
 ```sh
 ./generator --generate_agency_certificate ./dir_agency_ca ./dir_chain_ca agencya
 ./generator --generate_agency_certificate ./dir_agency_ca ./dir_chain_ca agencyb
-./generator --generate_agency_certificate ./dir_agency_ca ./dir_chain_ca agencyc
-./generator --generate_agency_certificate ./dir_agency_ca ./dir_chain_ca agencyd
 cp -r ./dir_agency_ca/agencya/* ../generator-a/meta/
-cp -r ./dir_agency_ca/agencyb/* ../generator-b/meta/
-cp -r ./dir_agency_ca/agencyc/* ../generator-c/meta/
-cp -r ./dir_agency_ca/agencyd/* ../generator-d/meta/
+cp -r ./dir_agency_ca/agencyb/* ../generator-b/meta/WS
 ```
 
 `--generate_agency_certificate`生成机构的密钥
