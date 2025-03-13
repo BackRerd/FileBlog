@@ -81,7 +81,7 @@ INFO |  Chain cert end.
 ./generator --generate_agency_certificate ./dir_agency_ca ./dir_chain_ca agencya
 ./generator --generate_agency_certificate ./dir_agency_ca ./dir_chain_ca agencyb
 cp -r ./dir_agency_ca/agencya/* ../generator-a/meta/
-cp -r ./dir_agency_ca/agencyb/* ../generator-b/meta/WS
+cp -r ./dir_agency_ca/agencyb/* ../generator-b/meta/
 ```
 
 `--generate_agency_certificate`生成机构的密钥
