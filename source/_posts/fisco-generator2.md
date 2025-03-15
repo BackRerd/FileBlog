@@ -46,7 +46,7 @@ tar -zxvf ./resource/fisco-bcos.tar.gz -C ./meta
 
 # 准备工作
 
-根据前置条件中可以看到需求是ABCD机构所以要将当前的文件复制成ABCD四份。
+根据前置条件中可以看到需求是AB机构所以要将当前的文件复制成AB四份。
 
 ```sh
 cp -r generator/ generator-a
