@@ -228,7 +228,14 @@ ps -ef | grep fisco
 10.以上区块链搭建完成，但还需要可视化界面。
 
 ```sh
+cd
 git clone https://gitee.com/BackRe/webase.git #现在群里下
+```
+
+进入到webase目录中
+
+```sh
+cd ./webase
 ```
 
 部署
@@ -247,4 +254,4 @@ python3 deploy.py startAll
 
 报告项目经理按你下达的任务指令我以完成部署工作。
 
-所以我将我的区块链ip等信息交给项目经理。
+我将我的区块链ip等信息交给项目经理。
