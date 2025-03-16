@@ -63,7 +63,7 @@ cd ./generator
 tar -zxvf ./resource/console.tar.gz -C ./
 ```
 
-将sdk密钥证书复制到控制台的`conf`中,并且初始化config.toml文件
+将sdk密钥证书复制到控制台的配置文件夹中,并且初始化配置文件
 
 ```sh
 cp ./sdk_ca_a/sdk/* ./console/conf/
@@ -76,7 +76,7 @@ cp -r ./console/conf/config-example.toml ./console/conf/config.toml
 bash ./console/start.sh
 ```
 
-查询当前块的高度,退出控制台
+测试控制台，查询当前块的高度,退出控制台
 
 ```
 getBlockNumber
@@ -92,6 +92,6 @@ bash sol2java.sh -p site.backrer.fisco
 
 出现`success`代表代码生成成功。
 
-报告项目经理按你下达的任务指令我以完成部署工作。
+报告项目经理按你下达的任务指标我以完成编写工作。
 
-我将把连接信息交给你项目经理。
+我现将连接信息交给项目经理。

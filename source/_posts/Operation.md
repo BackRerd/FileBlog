@@ -252,6 +252,17 @@ python3 deploy.py installAll
 python3 deploy.py startAll
 ```
 
+查询ip地址
+
+```sh
+ip addr
+```
+
+![image.png](https://s2.loli.net/2025/03/16/pjxWRJ2Fcesiar3.png)
+
+(在ens33下，其中inet后面的地址就是ip地址。没有/24。最后的ip是:你的ip:5000)
+
 报告项目经理按你下达的任务指令我以完成部署工作。
 
 我将我的区块链ip等信息交给项目经理。
+
