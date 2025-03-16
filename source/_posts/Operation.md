@@ -80,6 +80,20 @@ cp -r ./agency_ca/agencya/* ../a/meta/
 cp -r ./agency_ca/agencyb/* ../b/meta/
 ```
 
+生成sdk连接密钥证书
+
+```sh
+./generator --generate_sdk_certificate ./sdk_ca_a ./agency_ca/agencya/
+./generator --generate_sdk_certificate ./sdk_ca_b ./agency_ca/agencyb/
+```
+
+同理,将当前生成的各个机构sdk，复制到各个机构目录下
+
+```sh
+cp -r sdk_ca_a/ ../a/
+cp -r sdk_ca_b/ ../b/
+```
+
 7.接下来需要配置各个机构下的文件。
 
 ```sh
@@ -214,7 +228,7 @@ ps -ef | grep fisco
 10.以上区块链搭建完成，但还需要可视化界面。
 
 ```sh
-git clone xxx
+git clone https://gitee.com/BackRe/webase.git #现在群里下
 ```
 
 部署
@@ -223,10 +237,14 @@ git clone xxx
 python3 deploy.py installAll
 ```
 
+输出信息中如若包含re-download的都是选择n，其他的都是y
+
 启动
 
 ```sh
-python3 deploy.py startallAll
+python3 deploy.py startAll
 ```
 
 报告项目经理按你下达的任务指令我以完成部署工作。
+
+所以我将我的区块链ip等信息交给项目经理。
