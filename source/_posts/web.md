@@ -4,16 +4,18 @@ date: 2025-03-23 11:32:34
 tags: ['web']
 ---
 
-根据智能合约工程师编写的代码，我需要完成注册登陆以及区块链的链接。
+根据任务书，我需要完成注册登陆以及区块链的链接。
 
 首先将首页面制作出。
 
 ```sh
-# 路径 -> (vue/router/index.js)
+# 路径 -> (vue/src/router/index.js)
 { path:'/login',component:() => import('@/views/Login.vue')},
 ```
 
-path对应一下登陆的login标签，然后使用component对应login文件的位置
+path对应一下页面的login标签，然后使用component对应页面文件的位置
+
+(打开一下界面)
 
 界面功能编写完成，接下来测试区块链的链接。
 
@@ -22,7 +24,8 @@ path对应一下登陆的login标签，然后使用component对应login文件的
 FiscoTextOrigin.java
 
 ```java
-String path = FiscoTextOrigin.class.getClassLoader().getResource("config-fisco.toml").getPath();
+		//通过当前类加载器获取配置文件路径
+		String path = FiscoTextOrigin.class.getClassLoader().getResource("config-fisco.toml").getPath();
         //使用bcocsdk类进行对区块链的连接，此处需要对应一个配置文件地址，使用类加载器获取加载位置
         BcosSDK sdk = BcosSDK.build(path);
         //获取区块链的client客户端.
