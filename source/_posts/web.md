@@ -43,7 +43,7 @@ FiscoTextOrigin.java
 
 进行启动测试，测试成功
 
-接下来将代码用于实际当中，在注册登陆等功能处添加上对应的代码
+接下来将代码用于功能当中，在注册登陆等功能处添加上对应的代码
 
 WebController.java
 
@@ -83,3 +83,12 @@ Manager.vue
 ```
 
 新增捐赠类型，使用管理员账号进行添加新的类型
+
+新增AI帮助回复功能,通过最新的开源大模型DeepseakR1-671B自行训练的蒸馏模型API进行对接(/deepseek/chat/{msg})。
+
+Manger.vue
+
+```js
+const res = await request.get(`/chat/send/${encodeURIComponent(username)}/${encodeURIComponent(newMessage.value)}`)
+```
+
