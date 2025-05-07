@@ -4,7 +4,7 @@ date: 2025-03-16 11:49:27
 tags: ['定稿']
 ---
 
-所有人介绍项目以及口号，项目经理下发任务到运维工程师。已经向运维工程师下发了，任务书请查收。
+使用Fisco+Webase工具，完成多机构联盟链网络搭建，部署Webase可视化平台，确保节点跨群组互通与智能合约部署环境就绪  
 
 | 机构  |   节点   | 所属群组 | P2P地址 | Channel监听地址 | json监听地址 | IP地址    |
 | ----- | :------: | -------- | ------- | --------------- | ------------ | :-------- |
@@ -14,42 +14,32 @@ tags: ['定稿']
 |       | 节点1(3) | 群组1    | 30303   | 20203           | 8548         | 127.0.0.1 |
 | 机构C | 节点0(4) | 群组2    | 30304   | 20204           | 8549         | 127.0.0.1 |
 
-根据项目经理下发的任务书，我们来完成区块链部署的工作。
-
-1.从我们的服务器上下载区块链搭建工具(generator):
+根据项目经理下发的任务书，我首先来完成区块链网络的搭建，为接下来整个项目的分布式账本以及用户管理链做好准备。
 
 ```sh
 git clone https://gitee.com/FISCO-BCOS/generator.git
 cd ./generator
 ```
 
-2.因为网络问题工具已经提前构建完成，所有我们先测试一下工具是否能使用。
-
 ```sh
 ./generator -h
 ```
 
-3.根据上面显示的信息，可以知道工具可以正常使用。接下来我们需要完成区块链搭建的重要部分，获取区块链所使用的二进制文件。
+这里由于项目的兼容性，我首先要获取对应版本的二进制文件，确定好区块链网络的版本。
 
 ```sh
 git clone https://gitee.com/BackRe/resource.git
 ```
 
-在获取完成后，需要将二进制文件解压到`./meta`目录下。meta目录相当于一个缓存文件，几乎所有的信息文件都会放在这里。
-
 ```sh
 tar -zxvf ./resource/fisco-bcos.tar.gz -C ./meta
 ```
-
-解压完成后，查询一下二进制文件的版本信息。
-
+获取之后查询一下版本信息，这里使用的Fisco2.x的版本，这个版本对项目的兼容性较好。
 ```sh
 ./meta/fisco-bcos -v
 ```
 
-看到版本信息后代表文件正常解压成功。
-
-4.我们需要将工具文件复制成a,b机构，为后续的智能合约做准备。
+对于我们初期的项目，暂时使用两个机构即可。
 
 ```sh
 cd ..
@@ -58,50 +48,42 @@ cp -r ./generator b
 cd ./generator
 ```
 
-5.在复制完成之后，需要生成机构的唯一密钥和证书。
+由于安全性，我们的整体项目需要一条唯一的一串密钥。
 
 ```sh
 ./generator --generate_chain_certificate ./chain_ca
 ```
 
-看到`Generate root cert success,dir is /root/fisco/generator/dir_chain_ca`信息，机构的`唯一`密钥生成完毕,并且知道密钥生成在`/root/fisco/generator/dir_chain_ca`。
-
-6.通过唯一密钥，我们需要生成各个机构的密钥。
+然后根据我们的唯一密钥，去分发各个机构的密钥。
 
 ```sh
 ./generator --generate_agency_certificate ./agency_ca ./chain_ca agencya
 ./generator --generate_agency_certificate ./agency_ca ./chain_ca agencyb
 ```
 
-将当前生成的各个机构密钥，复制到各个机构目录下。
-
 ```sh
 cp -r ./agency_ca/agencya/* ../a/meta/
 cp -r ./agency_ca/agencyb/* ../b/meta/
 ```
 
-生成sdk连接密钥证书
+我们的整体项目需要与其他语言进行对接，所有我要提前准备好SDK连接密钥，便于其他语言的对接。
 
 ```sh
 ./generator --generate_sdk_certificate ./sdk_ca_a ./agency_ca/agencya/
 ./generator --generate_sdk_certificate ./sdk_ca_b ./agency_ca/agencyb/
 ```
 
-同理,将当前生成的各个机构sdk，复制到各个机构目录下
-
 ```sh
 cp -r sdk_ca_a/ ../a/
 cp -r sdk_ca_b/ ../b/
 ```
 
-7.接下来需要配置各个机构下的文件。
+以上我生成好了整个区块链中的所有密钥，现在我要开始进行区块链的初始化文件配置。
 
 ```sh
 cd ../a
 vim conf/node_deployment.ini
 ```
-
-为机构a配置两个节点和对应的端口。
 
 ```sh
 # 修改以下信息
@@ -109,15 +91,11 @@ p2p_listen_port=30300
 channel_listen_port=20200
 jsonrpc_listen_port=8545
 ```
-
-b同理。
-
+我们项目对端口没有硬性的要求，所以在这里我只需要对端口进行自增一位数即可。
 ```sh
 cd ../b
 vim conf/node_deployment.ini
 ```
-
-修改b的对应配置信息。
 
 ```sh
 # 修改以下信息
@@ -130,43 +108,33 @@ channel_listen_port=20203
 jsonrpc_listen_port=8548
 ```
 
-8.生成机构A的节点信息和p2p连接信息
+初始化配置完成后，我需要将两个机构进行连接，否则无法实现分布式分发，所以我现在将两个机构的连接信息文件创建出来。
 
 ```sh
 cd ../a
 ./generator --generate_all_certificates ./node_info
 ```
-
-显示xxx信息表示节点信息和p2p连接信息生成成功。
-
-将机构a `p2p`文件复制到机构b的`meta`目录下。
 
 ```sh
 cd ../b
 cp ../a/node_info/peers.txt ./meta/peersa.txt
 ```
 
-同理将生成机构b的节点信息和p2p文件，然后再复制到机构a中。
-
 ```sh
 ./generator --generate_all_certificates ./node_info
 cp ./node_info/peers.txt ../a/meta/peersb.txt
 ```
 
-将机构b的节点信息复制到机构a的`meta`目录下。
-
 ```sh
 cp ./node_info/cert_* ../a/meta/
 ```
 
-切回机构a中，配置群组文件。
+由于我们项目采取的是多群组模式，所以现在需要将对应的群组信息初始化出来。
 
 ```sh
 cd ../a
 vim ./conf/group_genesis.ini
 ```
-
-根据文档配置对应的节点信息。
 
 ```sh
 [group]
@@ -179,7 +147,9 @@ node2=127.0.0.1:30302
 node3=127.0.0.1:30303
 ```
 
-生成区块链中的第一个区块。
+目前为止区块链的初始化和密钥已经生成创建完成。
+
+由于区块链是以链条的形式存在，每一个块都会继承上一个块的信息，但目前我的区块链网络是空的，所以我需要创建出第一个区块，并分发给各个机构。
 
 ```sh
 ./generator --create_group_genesis ./group
@@ -187,19 +157,17 @@ node3=127.0.0.1:30303
 
 看到`generate ./group/group.1.genesis, successful`信息表示生成成功。
 
-将第一个区块复制到机构b中
-
 ```sh
 cp -r ./group/group.1.genesis ../b/meta/
 ```
 
-9.现在生成机构a的节点。
+第一个区块存在后，我将开始着手构建机构A链。
 
 ```sh
 ./generator --build_install_package ./meta/peersb.txt ./nodea
 ```
 
-看到`Build operation end`表示节点生成完毕。
+看到`Build operation end`表示机构A生成完毕。
 
 启动机构a的所有节点,并查询启动状态
 
@@ -212,7 +180,7 @@ ps -ef | grep fisco
 
 ![image.png](https://s2.loli.net/2025/03/16/ZEheYOJPksFplvH.png)
 
-同理生成机构b的节点,并启动查看。
+同理生成机构b链,并启动查看。
 
 ```sh
 cd ../b
@@ -221,38 +189,30 @@ bash ./nodeb/start_all.sh
 ps -ef | grep fisco
 ```
 
-看到以下节点信息，代表所有节点已经启动成功。
+看到以下节点信息，代表所有节点已经启动成功。以上我已完成了整个项目的区块链搭建。
 
 ![image.png](https://s2.loli.net/2025/03/16/DF5R6fXMKVdhygA.png)
 
-10.以上区块链搭建完成，但还需要可视化界面。
+由于智能合约编写时需要可视化界面，以及更好的数据监控，我将部署Webase平台。
 
 ```sh
 cd
 git clone https://gitee.com/BackRe/webase.git #现在群里下
 ```
 
-进入到webase目录中
-
 ```sh
 cd ./webase
 ```
-
-部署
 
 ```sh
 python3 deploy.py installAll
 ```
 
-输出信息中如若包含re-download的都是选择n，其他的都是y
-
-启动
-
 ```sh
 python3 deploy.py startAll
 ```
 
-查询ip地址
+到此，我的工作以完成，我将查询我的IP以便于其他人的连接。
 
 ```sh
 ip addr

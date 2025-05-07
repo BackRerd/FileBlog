@@ -4,46 +4,46 @@ date: 2025-03-23 11:32:34
 tags: ['web']
 ---
 
-根据任务书，我需要完成注册登陆以及区块链的链接。
+根据任务书，我需要使用SpringBoot+vue完成捐赠系统核心功能开发，实现区块链集成（区块链链接）、用户认证及管理模块扩展  (区块链测试)
 
-首先将首页面制作出。
+首先完成任务一，基础功能开发制作出让用户登录注册的页面。
 
 ```sh
 # 路径 -> (vue/src/router/index.js)
 { path:'/login',component:() => import('@/views/Login.vue')},
 ```
 
-path对应一下页面的login标签，然后使用component对应页面文件的位置
+登录注册页面已经正常显示。
 
-(打开一下界面)
+由于项目需要搭配智能合约去使用，所以我需要获取到智能合约的地址才能去使用智能合约。
 
-界面功能编写完成，接下来测试区块链的链接。
-
-使用已有的测试类
+首先我先测试一下是否能与区块链做连接。
 
 FiscoTextOrigin.java
 
 ```java
-		//通过当前类加载器获取配置文件路径
+
 		String path = FiscoTextOrigin.class.getClassLoader().getResource("config-fisco.toml").getPath();
-        //使用bcocsdk类进行对区块链的连接，此处需要对应一个配置文件地址，使用类加载器获取加载位置
+		//通过BcosSDK提供的类，对区块链网络连接进行构建
         BcosSDK sdk = BcosSDK.build(path);
-        //获取区块链的client客户端.
+		//构建完成后，需要对区块链网络的连接，并且获取连接信息
         Client client = sdk.getClient(1);
-        //获取区块高度
+		//获取到连接信息后，获取一下块的高度测试一下是否正常连接
         System.out.println("当前区块高度 = " + client.getBlockNumber().getBlockNumber());
-        //根据智能合约工程师所写代码类，进行智能合约的部署
+		//通过智能合约工程师编写的SDK，我对合约进行一下部署
         UserStorage userStorage = UserStorage.deploy(client,client.getCryptoSuite().getCryptoKeyPair());
-        //通过部署的智能合约获取部署的地址
+		//部署后获取其部署的合约地址
         System.out.println("智能合约部署地址 = " + userStorage.getContractAddress());
-        //使用其中的方法创建和登陆测试zhangsan用户
+		//并测试一下合约功能是否正常
         userStorage.storePassword("zhangsan","123456");
         System.out.println("登陆返回信息 = " + userStorage.verifyPassword("zhangsan", "123456"));
 ```
 
-进行启动测试，测试成功
+进行运行启动，这里以完成区块链的连接，连接已经正常，并获取到了智能合约地址，我将对智能合约地址进行设置。
 
-接下来将代码用于功能当中，在注册登陆等功能处添加上对应的代码
+
+
+接下来我将完成智能合约与登录功能的连接，使用智能合约中的自动化用户管理功能。
 
 WebController.java
 
@@ -59,7 +59,7 @@ WebController.java
     }
 ```
 
-接下来进行页面测试，运行项目
+(项目经理测试)
 
 (注册用户测试->登陆用户测试)
 
