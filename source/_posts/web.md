@@ -24,7 +24,7 @@ FiscoTextOrigin.java
 ```java
 
 		String path = FiscoTextOrigin.class.getClassLoader().getResource("config-fisco.toml").getPath();
-		//通过BcosSDK提供的类，对区块链网络连接进行构建
+		//通过Fisco提供的类，对区块链网络连接进行构建
         BcosSDK sdk = BcosSDK.build(path);
 		//构建完成后，需要对区块链网络的连接，并且获取连接信息
         Client client = sdk.getClient(1);
@@ -59,13 +59,9 @@ WebController.java
     }
 ```
 
+我负责应用核心功能开发，完成了文字AI对接测试及区块链集成任务，同时发现了AI连接不稳定、区块链接口不兼容及应用性能不足等问题。并且我已找到相应的应对措施，现我将相关信息交给项目经理
+
 (项目经理测试)
-
-(注册用户测试->登陆用户测试)
-
-麻烦智能合约工程师查看一下交易或块是否增长
-
-(增长)->报告项目经理应用开发已完成
 
 
 
@@ -82,13 +78,24 @@ Manager.vue
           </el-menu-item>
 ```
 
-新增捐赠类型，使用管理员账号进行添加新的类型
+新增捐赠类型
+
+```sql
+INSERT INTO `donate_type` VALUES (8, '其他');
+```
+
+新增数据回溯(manger/student.vue)
+
+```vue
+<el-button type="danger" circle @click="reload(scope.row.id)">回</el-button>
+```
 
 新增AI帮助回复功能,通过最新的开源大模型DeepseakR1-671B自行训练的蒸馏模型API进行对接(/deepseek/chat/{msg})。
 
 Manger.vue
 
 ```js
-const res = await request.get(`/chat/send/${encodeURIComponent(username)}/${encodeURIComponent(newMessage.value)}`)
+messages.value.push({ text: res.data.content,sender: 'bot'})
+handleNavigation(res.data.match)
 ```
 
